@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Stationery Shop</title>
+    <link rel="stylesheet" href="signin.css">
+</head>
+<body>
+
+<div class="auth-wrapper">
+    <div class="auth-box">
+        <div class="auth-header">
+            <h2 id="title">Sign In</h2>
+        </div>
+
+        <!-- SIGN IN -->
+        <form id="signinForm">
+            <div class="field">
+                <label>Email</label>
+                <input type="email" id="loginEmail">
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+                <input type="password" id="loginPass">
+            </div>
+
+            <p class="error" id="loginError"></p>
+
+            <button type="submit">Sign In</button>
+            <p class="switch">No account? <span onclick="showSignup()">Create one</span></p>
+        </form>
+
+        <!-- SIGN UP -->
+        <form id="signupForm" class="hidden">
+            <div class="field">
+                <label>Full Name</label>
+                <input type="text" id="name">
+            </div>
+
+            <div class="field">
+                <label>Email</label>
+                <input type="email" id="email">
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+                <input type="password" id="password">
+            </div>
+
+            <div class="field">
+                <label>Confirm Password</label>
+                <input type="password" id="confirmPassword">
+            </div>
+
+            <p class="error" id="signupError"></p>
+
+            <button type="submit">Create Account</button>
+            <p class="switch">Already registered? <span onclick="showSignin()">Sign in</span></p>
+        </form>
+    </div>
+</div>
+
+<script>
+function showSignup() {
+    document.getElementById("signinForm").classList.add("hidden");
+    document.getElementById("signupForm").classList.remove("hidden");
+    document.getElementById("title").innerText = "Create Account";
+}
+
+function showSignin() {
+    document.getElementById("signupForm").classList.add("hidden");
+    document.getElementById("signinForm").classList.remove("hidden");
+    document.getElementById("title").innerText = "Sign In";
+}
+</script>
+
+</body>
+</html>
