@@ -1,0 +1,90 @@
+.background {
+    background-image: url("https://images.stockcake.com/public/b/d/b/bdbe7de6-bc15-4c2c-8269-5ae405a98d24_large/colorful-stationery-store-stockcake.jpg");
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.logo { 
+    height: 120px; 
+    width: 120px; 
+    border-radius: 50%; 
+    object-fit: cover;
+}
+nav {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+
+button {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cart {
+    position: relative;
+}
+
+.cart-count {
+    background-color: red;
+    color: white;
+    font-size: 0.8em;
+    padding: 2px 6px;
+    border-radius: 50%;
+    position: absolute;
+    top: -8px;
+    right: -15px;
+}
+
+
+.Card1 {
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 200px;
+    width: 500px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    margin-left: 500px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+header{
+    background-image: URL("https://img.freepik.com/free-photo/blue-stationery-white-background_23-2147710373.jpg?t=st=1718063274~exp=1718066874~hmac=d1efd8fb38882549d1e8a9d58714e1f785e815c19221fbe8bb6776aa66067711&w=1480");
+    background-size: cover;
+    height: 100px;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    gap: 200px;
+    display: flex;
+}
+footer {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+}
