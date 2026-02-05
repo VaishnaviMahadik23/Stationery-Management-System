@@ -3,6 +3,7 @@
 <head>
     <title>Stationery Shop</title>
     <link rel="stylesheet" href="style.css">
+   
 </head>
 <body>
     
@@ -22,13 +23,14 @@
             <a href="">Contact Us</a>
             <a href="">Blog</a>
             <div class="cart">
-                <a href="">
+                <a href="cart.html">
                     🛒 Cart <span class="cart-count">0</span>
                 </a>
             </div>
             <a href="signin.html">
             <button type="button">Sign in</button>
             </a>
+            <button onclick="logout()">Logout</button>
         </nav>
 
 
@@ -83,5 +85,12 @@
             <p>&copy; 2026 Vaishnavi's Stationery Shop | Contact: info@stationeryshop.com</p>
         </footer>
     
+         <script>
+            function logout() {
+            localStorage.removeItem("isLoggedIn");
+            alert("Logged out successfully");
+            window.location.href = "index.html";
+            }
+        </script>
 </body>
 </html>

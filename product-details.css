@@ -73,30 +73,55 @@ body {
 .actions {
     display: flex;
     gap: 15px;
+    margin-bottom: 15px;
 }
 
+.actions button {
+    flex: 1;
+    font-size: 16px;
+    padding: 12px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+}
+
+/* Add to Cart */
 .add-cart {
     background: #4a6cf7;
     color: #fff;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    cursor: pointer;
 }
 
 .add-cart:hover {
     background: #3656e3;
 }
 
+/* Buy Now */
 .buy-now {
     background: #27ae60;
     color: #fff;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    cursor: pointer;
 }
 
 .buy-now:hover {
     background: #219150;
+}
+
+/* Go to Cart */
+.go-cart-wrap {
+    margin-top: 10px;
+}
+
+.go-cart {
+    width: 100%;
+    background: #f1f3ff;
+    color: #4a6cf7;
+    border: 2px solid #4a6cf7;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.go-cart:hover {
+    background: #4a6cf7;
+    color: #fff;
 }

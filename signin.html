@@ -14,7 +14,7 @@
         </div>
 
         <!-- SIGN IN -->
-        <form id="signinForm" class="hidden" onsubmit="return validateSignin()">
+        <form id="signinForm" onsubmit="return validateSignin()">
 
             <div class="field">
                 <label>Email</label>
@@ -33,7 +33,7 @@
         </form>
 
         <!-- SIGN UP -->
-        <form id="signupForm"  onsubmit="return validateSignup()">
+        <form id="signupForm" class="hidden" onsubmit="return validateSignup()">
             <div class="field">
                 <label>Full Name</label>
                 <input type="text" id="name">
@@ -75,21 +75,14 @@ function showSignin() {
     document.getElementById("title").innerText = "Sign In";
 }
 
-/* ---------- SIGN IN VALIDATION ---------- */
+/* ---------- SIGN IN ---------- */
 function validateSignin() {
     const email = document.getElementById("loginEmail").value.trim();
     const pass = document.getElementById("loginPass").value.trim();
     const error = document.getElementById("loginError");
 
-    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/i;
-
     if (email === "" || pass === "") {
         error.textContent = "All fields are required.";
-        return false;
-    }
-
-    if (!emailPattern.test(email)) {
-        error.textContent = "Please enter a valid email address.";
         return false;
     }
 
@@ -98,12 +91,17 @@ function validateSignin() {
         return false;
     }
 
-    error.textContent = "";
-    alert("Sign in successful (backend integration later)");
-    return false; // prevent actual submit for now
+    // ✅ LOGIN SUCCESS (FRONTEND ONLY)
+    localStorage.setItem("isLoggedIn", "true");
+
+    alert("Login successful");
+
+    // redirect after login
+    window.location.href = "cart.html";
+    return false;
 }
 
-/* ---------- SIGN UP VALIDATION ---------- */
+/* ---------- SIGN UP ---------- */
 function validateSignup() {
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
@@ -111,20 +109,8 @@ function validateSignup() {
     const confirm = document.getElementById("confirmPassword").value.trim();
     const error = document.getElementById("signupError");
 
-    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/i;
-
     if (name === "" || email === "" || pass === "" || confirm === "") {
         error.textContent = "All fields are required.";
-        return false;
-    }
-
-    if (!emailPattern.test(email)) {
-        error.textContent = "Please enter a valid email address.";
-        return false;
-    }
-
-    if (pass.length < 6) {
-        error.textContent = "Password must be at least 6 characters.";
         return false;
     }
 
@@ -133,12 +119,11 @@ function validateSignup() {
         return false;
     }
 
-    error.textContent = "";
-    alert("Account created successfully (backend integration later)");
-    return false; // prevent actual submit for now
+    alert("Account created successfully. Please sign in.");
+    showSignin();
+    return false;
 }
 </script>
-
 
 </body>
 </html>

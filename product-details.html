@@ -17,73 +17,128 @@
     <!-- PRODUCT INFO -->
     <div class="product-info">
         <h1 id="productName"></h1>
-        <p class="price" id="productPrice"></p>
+        <p class="price">₹<span id="productPrice"></span></p>
 
         <p class="description" id="productDesc"></p>
 
+        <!-- QUANTITY -->
         <div class="quantity-box">
-            <label>Quantity:</label>
-            <input type="number" value="1" min="1">
+            <label for="qty">Quantity:</label>
+            <input type="number" id="qty" value="1" min="1">
         </div>
 
+        <!-- ACTIONS -->
         <div class="actions">
-            <button class="add-cart">Add to Cart</button>
-            <button class="buy-now">Buy Now</button>
+            <button class="add-cart" onclick="addToCart()">Add to Cart</button>
+            <button class="buy-now" onclick="buyNow()">Buy Now</button>
+        </div>
+
+        <!-- GO TO CART -->
+        <div class="go-cart-wrap">
+            <button class="go-cart" onclick="goToCart()" style="display:none;">
+                Go to Cart
+            </button>
         </div>
     </div>
 
 </section>
 
 <script>
-/* ---------- PRODUCT DATA (TEMP FRONTEND DATA) ---------- */
+/* ---------- PRODUCT DATA ---------- */
 const products = {
     1: {
         name: "Ball Pen",
-        price: "₹20",
+        price: 20,
         image: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
-        description: "Smooth writing ball pen with long-lasting ink. Perfect for daily use."
+        description: "Smooth writing ball pen with long-lasting ink."
     },
     2: {
         name: "Notebook",
-        price: "₹80",
+        price: 80,
         image: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
-        description: "High-quality notebook with premium pages for writing."
+        description: "High-quality notebook with premium pages."
     },
     3: {
         name: "Color Set",
-        price: "₹150",
+        price: 150,
         image: "https://cdn-icons-png.flaticon.com/512/2920/2920277.png",
-        description: "Bright and vibrant color set for creativity and art projects."
+        description: "Bright and vibrant color set."
     },
     4: {
         name: "Sticky Notes",
-        price: "₹60",
+        price: 60,
         image: "https://cdn-icons-png.flaticon.com/512/3145/3145765.png",
-        description: "Colorful sticky notes for reminders and organization."
+        description: "Colorful sticky notes for reminders."
     }
 };
 
-/* ---------- GET PRODUCT ID FROM URL ---------- */
+/* ---------- GET PRODUCT ---------- */
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
+const product = products[productId];
 
-if (products[productId]) {
-    document.getElementById("productName").textContent = products[productId].name;
-    document.getElementById("productPrice").textContent = products[productId].price;
-    document.getElementById("productImg").src = products[productId].image;
-    document.getElementById("productDesc").textContent = products[productId].description;
-} else {
-    document.body.innerHTML = "<h2 style='text-align:center;margin-top:50px'>Product not found</h2>";
+if (!product) {
+    document.body.innerHTML =
+        "<h2 style='text-align:center;margin-top:50px'>Product not found</h2>";
+    throw new Error("Invalid product ID");
 }
 
-/* TEMP ACTIONS */
-document.querySelector(".buy-now").onclick = () => {
-    alert("Proceed to checkout (backend later)");
-};
+/* ---------- SET PRODUCT DATA ---------- */
+document.getElementById("productName").textContent = product.name;
+document.getElementById("productPrice").textContent = product.price;
+document.getElementById("productImg").src = product.image;
+document.getElementById("productDesc").textContent = product.description;
 
-document.querySelector(".add-cart").onclick = () => {
-    alert("Added to cart (logic coming next)");
-};
+/* ---------- SHOW GO TO CART IF CART EXISTS ---------- */
+const cartOnLoad = JSON.parse(localStorage.getItem("cart")) || [];
+if (cartOnLoad.length > 0) {
+    document.querySelector(".go-cart").style.display = "inline-block";
+}
+
+/* ---------- ADD TO CART ---------- */
+function addToCart() {
+    const qty = parseInt(document.getElementById("qty").value);
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existing = cart.find(item => item.id == productId);
+
+    if (existing) {
+        existing.quantity += qty;
+    } else {
+        cart.push({
+            id: productId,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: qty
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    document.querySelector(".go-cart").style.display = "inline-block";
+
+    alert("Item added to cart");
+}
+
+/* ---------- BUY NOW ---------- */
+function buyNow() {
+    addToCart();
+    goToCart();
+}
+
+/* ---------- GO TO CART (LOGIN CHECK) ---------- */
+function goToCart() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (!isLoggedIn) {
+        alert("Please login to continue");
+        window.location.href = "signin.html";
+        return;
+    }
+
+    window.location.href = "cart.html";
+}
+
 </script>
 
 </body>

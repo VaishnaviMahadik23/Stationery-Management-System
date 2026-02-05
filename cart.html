@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart | Stationery Shop</title>
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+
+<header class="page-header">
+    <h1>Your Cart</h1>
+    <p>Review your selected items before checkout</p>
+</header>
+
+<section class="cart-container">
+
+    <!-- CART ITEMS -->
+    <div class="cart-items" id="cartItems"></div>
+
+    <!-- CART SUMMARY -->
+    <div class="cart-summary">
+        <h2>Order Summary</h2>
+
+        <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">₹0</span>
+        </div>
+
+        <div class="summary-row">
+            <span>Delivery</span>
+            <span>Free</span>
+        </div>
+
+        <hr>
+
+        <div class="summary-row total">
+            <span>Total</span>
+            <span id="total">₹0</span>
+        </div>
+
+        <button class="checkout" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+
+</section>
+
+<script>
+/* ---------- LOGIN CHECK ---------- */
+const isLoggedIn = localStorage.getItem("isLoggedIn");
+if (!isLoggedIn) {
+    alert("Please login to access your cart");
+    window.location.href = "login.html";
+}
+
+/* ---------- LOAD CART ---------- */
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const cartItemsDiv = document.getElementById("cartItems");
+const subtotalEl = document.getElementById("subtotal");
+const totalEl = document.getElementById("total");
+
+function renderCart() {
+    cartItemsDiv.innerHTML = "";
+    let subtotal = 0;
+
+    if (cart.length === 0) {
+        cartItemsDiv.innerHTML =
+            "<p style='text-align:center;font-size:16px'>Your cart is empty</p>";
+        subtotalEl.textContent = "₹0";
+        totalEl.textContent = "₹0";
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        subtotal += item.price * item.quantity;
+
+        cartItemsDiv.innerHTML += `
+            <div class="cart-item">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="item-details">
+                    <h3>${item.name}</h3>
+                    <p>₹${item.price}</p>
+                </div>
+                <input type="number" min="1" value="${item.quantity}"
+                    onchange="updateQty(${index}, this.value)">
+                <button class="remove" onclick="removeItem(${index})">Remove</button>
+            </div>
+        `;
+    });
+
+    subtotalEl.textContent = `₹${subtotal}`;
+    totalEl.textContent = `₹${subtotal}`;
+}
+
+function updateQty(index, qty) {
+    qty = parseInt(qty);
+    if (qty < 1 || isNaN(qty)) qty = 1;
+
+    cart[index].quantity = qty;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+}
+
+/* ---------- CHECKOUT (TEMP FRONTEND) ---------- */
+function checkout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty");
+        return;
+    }
+
+    alert("Proceeding to checkout (backend integration next)");
+}
+
+/* ---------- INIT ---------- */
+renderCart();
+</script>
+
+</body>
+</html>
