@@ -14,7 +14,8 @@
         </div>
 
         <!-- SIGN IN -->
-        <form id="signinForm">
+        <form id="signinForm" class="hidden" onsubmit="return validateSignin()">
+
             <div class="field">
                 <label>Email</label>
                 <input type="email" id="loginEmail">
@@ -32,7 +33,7 @@
         </form>
 
         <!-- SIGN UP -->
-        <form id="signupForm" class="hidden">
+        <form id="signupForm"  onsubmit="return validateSignup()">
             <div class="field">
                 <label>Full Name</label>
                 <input type="text" id="name">
@@ -73,7 +74,71 @@ function showSignin() {
     document.getElementById("signinForm").classList.remove("hidden");
     document.getElementById("title").innerText = "Sign In";
 }
+
+/* ---------- SIGN IN VALIDATION ---------- */
+function validateSignin() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const pass = document.getElementById("loginPass").value.trim();
+    const error = document.getElementById("loginError");
+
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/i;
+
+    if (email === "" || pass === "") {
+        error.textContent = "All fields are required.";
+        return false;
+    }
+
+    if (!emailPattern.test(email)) {
+        error.textContent = "Please enter a valid email address.";
+        return false;
+    }
+
+    if (pass.length < 6) {
+        error.textContent = "Password must be at least 6 characters.";
+        return false;
+    }
+
+    error.textContent = "";
+    alert("Sign in successful (backend integration later)");
+    return false; // prevent actual submit for now
+}
+
+/* ---------- SIGN UP VALIDATION ---------- */
+function validateSignup() {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const pass = document.getElementById("password").value.trim();
+    const confirm = document.getElementById("confirmPassword").value.trim();
+    const error = document.getElementById("signupError");
+
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/i;
+
+    if (name === "" || email === "" || pass === "" || confirm === "") {
+        error.textContent = "All fields are required.";
+        return false;
+    }
+
+    if (!emailPattern.test(email)) {
+        error.textContent = "Please enter a valid email address.";
+        return false;
+    }
+
+    if (pass.length < 6) {
+        error.textContent = "Password must be at least 6 characters.";
+        return false;
+    }
+
+    if (pass !== confirm) {
+        error.textContent = "Passwords do not match.";
+        return false;
+    }
+
+    error.textContent = "";
+    alert("Account created successfully (backend integration later)");
+    return false; // prevent actual submit for now
+}
 </script>
+
 
 </body>
 </html>
