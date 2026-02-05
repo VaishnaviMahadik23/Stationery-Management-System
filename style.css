@@ -173,6 +173,6 @@ footer {
     box-shadow: 0 6px 15px rgba(0,0,0,0.08);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 5px solid #4f46e5;
 }
-
 
