@@ -162,3 +162,17 @@ footer {
     transform: translateY(-6px);
     box-shadow: 0 14px 30px rgba(0,0,0,0.15);
 }
+
+.category-card {
+    text-decoration: none;
+    color: inherit;
+
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
