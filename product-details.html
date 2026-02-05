@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details | Stationery Shop</title>
+    <link rel="stylesheet" href="product-details.css">
+</head>
+<body>
+
+<section class="product-details-container">
+
+    <!-- PRODUCT IMAGE -->
+    <div class="product-image">
+        <img id="productImg" src="" alt="Product">
+    </div>
+
+    <!-- PRODUCT INFO -->
+    <div class="product-info">
+        <h1 id="productName"></h1>
+        <p class="price" id="productPrice"></p>
+
+        <p class="description" id="productDesc"></p>
+
+        <div class="quantity-box">
+            <label>Quantity:</label>
+            <input type="number" value="1" min="1">
+        </div>
+
+        <div class="actions">
+            <button class="add-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+        </div>
+    </div>
+
+</section>
+
+<script>
+/* ---------- PRODUCT DATA (TEMP FRONTEND DATA) ---------- */
+const products = {
+    1: {
+        name: "Ball Pen",
+        price: "₹20",
+        image: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
+        description: "Smooth writing ball pen with long-lasting ink. Perfect for daily use."
+    },
+    2: {
+        name: "Notebook",
+        price: "₹80",
+        image: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
+        description: "High-quality notebook with premium pages for writing."
+    },
+    3: {
+        name: "Color Set",
+        price: "₹150",
+        image: "https://cdn-icons-png.flaticon.com/512/2920/2920277.png",
+        description: "Bright and vibrant color set for creativity and art projects."
+    },
+    4: {
+        name: "Sticky Notes",
+        price: "₹60",
+        image: "https://cdn-icons-png.flaticon.com/512/3145/3145765.png",
+        description: "Colorful sticky notes for reminders and organization."
+    }
+};
+
+/* ---------- GET PRODUCT ID FROM URL ---------- */
+const params = new URLSearchParams(window.location.search);
+const productId = params.get("id");
+
+if (products[productId]) {
+    document.getElementById("productName").textContent = products[productId].name;
+    document.getElementById("productPrice").textContent = products[productId].price;
+    document.getElementById("productImg").src = products[productId].image;
+    document.getElementById("productDesc").textContent = products[productId].description;
+} else {
+    document.body.innerHTML = "<h2 style='text-align:center;margin-top:50px'>Product not found</h2>";
+}
+
+/* TEMP ACTIONS */
+document.querySelector(".buy-now").onclick = () => {
+    alert("Proceed to checkout (backend later)");
+};
+
+document.querySelector(".add-cart").onclick = () => {
+    alert("Added to cart (logic coming next)");
+};
+</script>
+
+</body>
+</html>

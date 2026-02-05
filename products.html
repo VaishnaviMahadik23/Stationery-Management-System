@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products | Stationery Shop</title>
+    <link rel="stylesheet" href="products.css">
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+    <h1 id="categoryTitle">Products</h1>
+    <p>Browse high-quality stationery items in this category</p>
+</header>
+
+<!-- PRODUCTS GRID -->
+<section class="products-container">
+
+    <!-- PRODUCT 1 -->
+    <div class="product-card">
+        <a href="product-details.html?id=1" class="product-link">
+            <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Ball Pen">
+            <h3>Ball Pen</h3>
+        </a>
+        <p class="price">₹20</p>
+        <button>Add to Cart</button>
+    </div>
+
+    <!-- PRODUCT 2 -->
+    <div class="product-card">
+        <a href="product-details.html?id=2" class="product-link">
+            <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Notebook">
+            <h3>Notebook</h3>
+        </a>
+        <p class="price">₹80</p>
+        <button>Add to Cart</button>
+    </div>
+
+    <!-- PRODUCT 3 -->
+    <div class="product-card">
+        <a href="product-details.html?id=3" class="product-link">
+            <img src="https://cdn-icons-png.flaticon.com/512/2920/2920277.png" alt="Color Set">
+            <h3>Color Set</h3>
+        </a>
+        <p class="price">₹150</p>
+        <button>Add to Cart</button>
+    </div>
+
+    <!-- PRODUCT 4 -->
+    <div class="product-card">
+        <a href="product-details.html?id=4" class="product-link">
+            <img src="https://cdn-icons-png.flaticon.com/512/3145/3145765.png" alt="Sticky Notes">
+            <h3>Sticky Notes</h3>
+        </a>
+        <p class="price">₹60</p>
+        <button>Add to Cart</button>
+    </div>
+
+</section>
+
+<script>
+/* Set category title from URL */
+const params = new URLSearchParams(window.location.search);
+const category = params.get("category");
+const title = document.getElementById("categoryTitle");
+
+if (category) {
+    title.textContent =
+        category.charAt(0).toUpperCase() + category.slice(1) + " Products";
+}
+</script>
+
+</body>
+</html>
