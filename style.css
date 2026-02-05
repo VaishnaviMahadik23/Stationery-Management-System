@@ -80,6 +80,7 @@ header{
     padding: 20px;
     gap: 200px;
     display: flex;
+    font-size: larger;
 }
 footer {
     background-color: rgba(0, 0, 0, 0.6);
